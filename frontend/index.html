@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Monitor de Portaria</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div>
+          <p class="eyebrow">Monitoramento em tempo real</p>
+          <h1>Portaria &amp; Transportadoras</h1>
+          <p class="subtitle">
+            Dados sincronizados a cada 10s com cache inteligente e tratamento de falhas.
+          </p>
+        </div>
+        <div class="status-card">
+          <span class="label">Status da sincronização</span>
+          <span id="sync-status" class="value">Carregando...</span>
+          <span id="last-update" class="muted">--</span>
+        </div>
+      </header>
+
+      <section class="metrics">
+        <div class="metric">
+          <h2>Total em FILA</h2>
+          <p id="total-fila" class="metric-value">0</p>
+          <p class="metric-caption">Atualização automática contínua.</p>
+        </div>
+        <div class="metric">
+          <h2>Transportadora SEIS</h2>
+          <p id="seis-count" class="metric-value">0</p>
+          <p class="metric-caption">Monitoramento dedicado para alertas.</p>
+        </div>
+        <div class="metric">
+          <h2>Fonte</h2>
+          <p id="source-url" class="metric-value small">--</p>
+          <p class="metric-caption">Leitura direta do portal.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Veículos monitorados</h2>
+          <span id="vehicle-count" class="badge">0 veículos</span>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Agenda</th>
+                <th>Caminhão</th>
+                <th>Transportadora</th>
+                <th>PDT</th>
+                <th>Status</th>
+                <th>Local</th>
+                <th>Previsão</th>
+              </tr>
+            </thead>
+            <tbody id="vehicles-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <div id="alert-overlay" class="alert-overlay hidden">
+      <div class="alert-modal">
+        <h2>ALERTA CRÍTICO</h2>
+        <p>
+          Veículo(s) da <strong>TRANSPORTADORA SEIS</strong> com status
+          <strong>CHAMADO DA PORTARIA</strong>.
+        </p>
+        <ul id="alert-list"></ul>
+        <button id="confirm-alert" class="confirm-button">CONFIRMAR</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,262 @@
+:root {
+  color-scheme: dark;
+  --bg: #0f1115;
+  --panel: #151922;
+  --panel-light: #1b2230;
+  --accent: #7dd3fc;
+  --accent-strong: #38bdf8;
+  --danger: #f97316;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --border: rgba(148, 163, 184, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 40%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+h1 {
+  font-size: 32px;
+  margin-top: 6px;
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: var(--muted);
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+.status-card {
+  background: var(--panel);
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.status-card .label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.status-card .value {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.status-card .muted {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.metric {
+  background: var(--panel);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metric-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.metric-value.small {
+  font-size: 14px;
+  word-break: break-all;
+  color: var(--text);
+}
+
+.metric-caption {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.panel {
+  background: var(--panel);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.badge {
+  background: var(--panel-light);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.table-wrapper th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.row-highlight {
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.status-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(148, 163, 184, 0.15);
+}
+
+.status-chip.alert {
+  background: rgba(249, 115, 22, 0.2);
+  color: var(--danger);
+}
+
+.alert-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.alert-overlay.hidden {
+  display: none;
+}
+
+.alert-modal {
+  background: var(--panel-light);
+  border: 2px solid var(--danger);
+  padding: 32px;
+  border-radius: 24px;
+  max-width: 520px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(249, 115, 22, 0.4);
+}
+
+.alert-modal h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: var(--danger);
+}
+
+.alert-modal p {
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.alert-modal ul {
+  list-style: none;
+  margin-bottom: 20px;
+  text-align: left;
+  display: grid;
+  gap: 8px;
+}
+
+.confirm-button {
+  background: var(--danger);
+  color: #111827;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .table-wrapper th,
+  .table-wrapper td {
+    padding: 10px;
+  }
+}
