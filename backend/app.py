@@ -6,6 +6,7 @@ from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 from html import unescape
 from html.parser import HTMLParser
+import re
 from typing import List, Dict, Optional
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
@@ -75,6 +76,8 @@ def parse_vehicle_rows(html: str) -> List[VehicleEntry]:
     parser = MotoristaTableParser()
     parser.feed(html)
     vehicles: List[VehicleEntry] = []
+    seen: set[str] = set()
+    agenda_pattern = re.compile(r"^\d{2}/\d{2}/\d{4}")
     for row in parser.rows:
         cleaned = [clean_text(cell) for cell in row]
         if len(cleaned) < 8:
@@ -84,6 +87,14 @@ def parse_vehicle_rows(html: str) -> List[VehicleEntry]:
         agenda, caminhao, transportadora, pdt, status, sinal, local, previsao = cleaned[:8]
         if not agenda or not caminhao:
             continue
+        if not agenda_pattern.match(agenda):
+            continue
+        dedupe_key = "|".join(
+            [agenda.strip(), caminhao.strip(), transportadora.strip(), status.strip()]
+        ).upper()
+        if dedupe_key in seen:
+            continue
+        seen.add(dedupe_key)
         vehicles.append(
             VehicleEntry(
                 agenda=agenda,
